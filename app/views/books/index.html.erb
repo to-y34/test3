@@ -1,0 +1,44 @@
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container">
+  <div class="row">
+   
+      <%= render 'books/lists' ,user: @user, book: @book %> 
+      
+      <div class="col-md-8 offset-md-1">
+        <h2>Books</h2>
+        <table class="table">
+            <thead>
+                <th></th>
+                <th>Title</th>
+                <th>Opinion</th>
+                <th clospan="3"></th>
+            </thead>
+            <% @books.each do |book| %>
+          <tbody>
+              <td>
+                  <%= link_to user_path(book.user.id) do %>
+                   <%= image_tag book.user.get_profile_image(100,100) %>
+                    <% end %>
+              </td>
+              <td>
+            <%= link_to book_path(book.id) do %>
+              <%= book.title %>
+                <% end %>
+              </td>    
+                  <td>
+                    <%= book.body %>
+                  </td>
+                  <% end %>
+          </tbody>          
+        </table>
+      </div>
+  </div>
+</div>
